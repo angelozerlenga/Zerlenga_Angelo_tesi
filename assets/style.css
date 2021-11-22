@@ -1,0 +1,33 @@
+.bg-title{
+    background-color: cornflowerblue;
+    padding-bottom: 20px;
+    font-size: 20px;
+}
+
+h1{
+    text-align: center;  
+    position: relative;
+    top: 15px;
+}
+
+.mod-gly{
+    position:relative;
+    left: 865px;
+    top: -30px;
+    font-size: 30px;
+}
+
+#map{
+    position: absolute;
+    height: 800px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.bg-gray{
+    background-color: lightgray;
+    padding-bottom: 700px;
+}
+
+

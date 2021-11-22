@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>R(e)CHARGE app</title>
+    <link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet/v0.7.7/leaflet.css" />
+	  <script src="https://d19vzq90twjlae.cloudfront.net/leaflet/v0.7.7/leaflet.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+crossorigin=""
+/>
+    <script
+      src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+      integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+      crossorigin=""
+    ></script>
+  
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="./assets/style.css" />
+
+    <!-- Import Animated.js -->
+    <script src="AnimatedMarker.js"></script>
+    <script src="AnimatedMarker2.js"></script>
+
+    <!-- Import Vue.js -->
+    <script src="https://unpkg.com/vue@3.0.0-beta.12/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app-recharge">
+        <div class="container-fluid bg-title">
+            <h1>R(e)CHARGE</h1><span class="glyphicon glyphicon-flash mod-gly"></span>
+        </div>
+
+        <div class="container-fluid mod-cont">
+            
+            <div class="row">
+            
+            <div class="col-sm-3 bg-gray">
+               
+            </div>
+            
+            <div class="col-sm-9">
+                <div id = "map"></div>
+
+    <script>
+      // Making a map and tiles
+      var map = L.map('map').setView([44.64685503962574, 10.92544395256418], 14);
+      const attribution =
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: 'OSM'})
+	.addTo(map);
+
+      // Making a marker with a custom icon
+  
+      const colIcon = L.Icon.extend({
+          options: {
+              iconUrl:'./images/colonnina.png',
+              iconSize: [38,95],
+              iconAnchor: [22,94],
+              popupAnchor: [-3, -76]
+          }
+      })
+
+      const column1 = new colIcon({icon: colIcon}),
+            column2 = new colIcon({icon: colIcon}),
+            column3 = new colIcon({icon: colIcon})
+            
+      
+
+      const marker = L.marker([44.64701352313015, 10.886374409919698], {icon:column1}).addTo(map);
+      const marker2 = L.marker([44.645898494613306, 10.893615271737561], {icon:column2}).addTo(map);
+      const marker3 = L.marker([44.66163938662867, 10.854815562426293], {icon:column3}).addTo(map);
+
+      var circle = L.circle([44.64701352313015, 10.886374409919698], {
+          color: 'red',
+          fillColor: '#f03',
+          fillOpacity: 0.5,
+          radius: 10
+      }).addTo(map);
+
+      var circle = L.circle([44.645898494613306, 10.893615271737561], {
+          color: 'red',
+          fillColor: '#f03',
+          fillOpacity: 0.5,
+          radius: 10
+      }).addTo(map);
+
+      var circle = L.circle([44.66163938662867, 10.854815562426293], {
+          color: 'red',
+          fillColor: '#f03',
+          fillOpacity: 0.5,
+          radius: 10
+      }).addTo(map);
+
+      marker.bindPopup("<b>Hey, i'm EnelX recharge station</b>").openPopup();
+      marker2.bindPopup("<b>Hey, i'm Be Charge station</b>").openPopup();
+      marker3.bindPopup("<b>Hey, i'm FREEtoX recharge station</b>").openPopup();
+
+      /*const carIcon = L.Icon.extend({
+          options: {
+              iconUrl:'./images/car.png',
+              iconSize: [38,95],
+              iconAnchor: [22,94],
+              popupAnchor: [-3, -76]
+          }
+      })*/
+      
+      //const CI1 = new carIcon({icon:carIcon})
+
+      //const car1 = L.Marker([44.64701352313015, 10.886374409919698], {icon:CI1}).addTo(map);
+
+      
+      var line = L.polyline([[44.66158044651328, 10.860285420085283], [44.66158044651328, 10.857285420085283], [44.66163938662867, 10.854815562426293]]);
+      map.addLayer(line);
+
+      var animatedMarker = L.animatedMarker(line.getLatLngs());
+    	map.addLayer(animatedMarker);
+
+    var line2 = L.polyline([[44.63777205846319, 10.885173533680236],[44.645898494613306, 10.885173533680236], [44.645898494613306, 10.891285420085283], [44.645898494613306, 10.893615271737561]]);
+    map.addLayer(line2);
+
+    var animatedMarker2 = L.animatedMarker2(line2.getLatLngs());
+    map.addLayer(animatedMarker2);
+
+     
+      
+    </script>
+       </div>
+
+    </div>
+    
+</div>
+
+
+
+     <!-- Import App -->
+     <script src="https://unpkg.com/vue@3"></script>
+     <script src="Tile38.js"></script>
+  </body>
+</html>
