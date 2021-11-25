@@ -1,0 +1,23 @@
+{
+  "name": "zerlenga-thesis",
+  "version": "1.0.0",
+  "description": "Thesis of Angelo Zerlenga",
+  "main": "Tile38.js",
+  "dependencies": {
+    "tile38": "^0.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angelozerlenga/Zerlenga_Angelo_tesi.git"
+  },
+  "author": "Angelo Zerlenga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/angelozerlenga/Zerlenga_Angelo_tesi/issues"
+  },
+  "homepage": "https://github.com/angelozerlenga/Zerlenga_Angelo_tesi#readme"
+}
