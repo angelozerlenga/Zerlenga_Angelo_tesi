@@ -21,14 +21,37 @@ client.set('Station', 'FREEtoX', [ 44.66163938662867, 10.854815562426293 ]).then
  * non garantisce la corretta esecuzione delle promise!
  */
 
-//let query = client.intersectsQuery('Station', { fence: true}).detect('inside','outside').bounds(44.64701352313015, 10.886374409919698, 44.66163938662867, 10.892356791848103);
 /*
- * senza il filtro detect() funziona, ma chiaramente non è esattamente quello che vuoi...
- * ho aperto una issue su github: https://github.com/phulst/node-tile38/issues/39
- * speriamo ci caghino
+ * Sembra che così la fence funzioni, basato sulla risposta qua: https://github.com/phulst/node-tile38/issues/39
  */
-let query = client.intersectsQuery('Station').bounds(44.63, 10.87, 44.67, 10.90);
+let query = client.intersectsQuery('Station', { fence: true})  // sembra il parametro fence non serva in realtà
+    .detect('inside','outside')
+    .bounds(44.63, 10.87, 44.67, 10.90);
+let fence = query.executeFence((err, result) => {
+    console.log("Callback called")
+    if (err) {
+        console.error("Error: " + err);
+    } else {
+        console.dir(result);
+    }
+});
+/*
+ * Test della fence: aggiungi stazione dopo 3 secondi dall'esecuzione del main script
+ */
+setTimeout(() => {
+    client.set('Station', 'SMariani', [ 44.64, 10.88 ]).then(() => {
+        console.log('Station SMariani added');
+    }).catch(err => {
+        console.err("Error: " + err)
+    });
+}, 3000)
+
+/*
+ * anche così funziona, ma questa non è una fence, è una query sincrona
+ */
+query = client.intersectsQuery('Station').bounds(44.63, 10.87, 44.67, 10.90);
 query.execute().then(result => {
+    console.log("Synchronous query called")
     console.dir(result);
 }).catch(err => {
     console.error("Error: " + err);
@@ -44,19 +67,9 @@ query.execute().then(result => {
     console.error("Error: " + err);
 });*/
 
-query = client.intersectsQuery('Station', { fence: true})
-    .detect('inside','outside')
-    .bounds(44.63, 10.87, 44.67, 10.90);
-let fence = query.executeFence((err, result) => {
-    console.log("Callback called")
-    if (err) {
-        console.error("Error: " + err);
-    } else {
-        console.dir(result);
-    }
-});
 
 
+// I COMANDI SOTTO NON LI HO TESTATI
 
 /*
 // if you want to be notified when the connection gets closed, register a callback function with onClose()
